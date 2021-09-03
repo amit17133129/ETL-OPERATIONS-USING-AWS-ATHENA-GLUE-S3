@@ -109,3 +109,124 @@ Next you have to specify crawler source type. Select Data Sources in `Crawler so
 <p align="center">
   <img width="1000" height="400" src="https://miro.medium.com/max/1167/1*1uO6Ivp2fmzEP3sokHhpwQ.png">
 </p>
+
+After that we have to specify the storage type we will be using. Here i will be using S3 storage type and include the path the path of s3 folder which we have created already above. Here i as you can see below that i have added th e respective path of s3 bucket.
+
+<p align="center">
+  <img width="1000" height="800" src="https://miro.medium.com/max/1167/1*c3vDPKWID0_ICBBivcobyg.png">
+</p>
+
+Then select `Add another data store` → `and click` on `next`. Then for choosing an `IAM role` we have to select existing `iam role` then `click next`.
+
+<p align="center">
+  <img width="1000" height="400" src="https://miro.medium.com/max/1167/1*-ROqcLhv3ZUNgCzuUjezJA.png">
+</p>
+
+Then when you wanted this crawler to schedule crawler. Here, you will get respective options as mentioned in below image. you can choose with what you are trying to solve.
+
+<p align="center">
+  <img width="1000" height="400" src="https://miro.medium.com/max/1167/1*lO0DOQv3zu3lHeEDYOetZw.png">
+</p>
+
+Then click on add data base and specify the name. Here i have giving sampledb1. After that click on next and finish.
+
+<p align="center">
+  <img width="1000" height="900" src="https://miro.medium.com/max/1167/1*p1bc-9lKNSU8gkiFUCAbOg.png">
+</p>
+
+Then you will see that your crawler has been created and you can run the crawler by clicking on run crawler.
+
+<p align="center">
+  <img width="1000" height="150" src="https://miro.medium.com/max/1167/1*XNWql3AjABoP0tQLebrVkA.png">
+</p>
+
+After successful run of crawler you can see in the database section that you your table has been created and it will give you the names of metadata (schemas).
+
+<p align="center">
+  <img width="1000" height="200" src="https://miro.medium.com/max/1167/1*rFdEk14TsJbgRPTnXyFxWQ.png">
+</p>
+
+<p align="center">
+  <img width="1000" height="300" src="https://miro.medium.com/max/1167/1*GMEsBfW-6ouq2iZXpld3YQ.png">
+</p>
+
+## Running Queries in Athena
+Then we will navigate to athena to to run the sql queries. In athena you will see that your database is already included in athena and you can run SQL Queries in the editor on the right hand side.
+
+<p align="center">
+  <img width="1000" height="400" src="https://miro.medium.com/max/1167/1*AJIKeAZlLQqATvMDdmc5ew.png">
+</p>
+
+## Glue Jobs
+Then we have to navigate to glue jobs to run our pyspark jobs. Click on `Add jobs` → `choose iam role (previously created)` → `Type (Spark)` → `Spark 2.4`, `Python 3 (Glue version 2.0)`.
+After that you can give your own path in S3 path where the script is stored or you can leave as default which is already taken. Same with case of Temporary directory. Then click on next.
+
+<p align="center">
+  <img width="1000" height="900" src="https://miro.medium.com/max/1167/1*yovjbpBjLzl9rWzWpGAMEg.png">
+</p>
+
+Then choose a data source. Here we will be using diabetes.csv then click next.
+
+<p align="center">
+  <img width="1000" height="200" src="https://miro.medium.com/max/1167/1*NM2VMZzbmGRIm9CvDdqqCg.png">
+</p>
+
+Then click on change schema and click on next. While adding a data target *choose use tables in the data catalog and update your data target* then `click on next`.
+
+<p align="center">
+  <img width="1000" height="200" src="https://miro.medium.com/max/1167/1*2NFrUJifiyT1eYJoT-W8bQ.png">
+</p>
+
+Then your Output Schema Definition will look like as below image and click on save job and edit script.
+
+<p align="center">
+  <img width="1000" height="400" src="https://miro.medium.com/max/1167/1*FpPTtFxDll4-mgIw9aMY3w.png">
+</p>
+
+You will see your glue job as mentioned in below image.
+
+<p align="center">
+  <img width="1000" height="150" src="https://miro.medium.com/max/1167/1*uJoVQ_pFnuUdbH-aexTU7Q.png">
+</p>
+
+## Setting Trigger
+Now to run this job we can click on `actions` → run `job` or else we can use trigger to run the jobs.
+Navigate to `trigger` → `then add trigger` → `give name` → `select your time` → `click next`.
+
+<p align="center">
+  <img width="1000" height="500" src="https://miro.medium.com/max/1167/1*bkH30d4Luw45_S0S6uJl1g.png">
+</p>
+
+Then select the job you wanted to trigger then click on next and finish.
+
+<p align="center">
+  <img width="1000" height="150" src="https://miro.medium.com/max/1167/1*-z4WBy3OULaAs0M5tHFadw.png">
+</p>
+
+To run this trigger you can use manual method. go to glue jobs then click on actions then click on run job. After the job run successfully you can then click on logs and it will be opening you cloudwatch for you.
+
+<p align="center">
+  <img width="1000" height="250" src="https://miro.medium.com/max/1167/1*XkdbNFVxs2dRIf5afNqfMw.png">
+</p>
+
+## Cloudwatch logs
+Here you will find all the logs your your glue jobs.
+
+<p align="center">
+  <img width="1000" height="400" src="https://miro.medium.com/max/1167/1*LOw2zy6GMjQ1aro9ccTk2w.png">
+</p>
+
+Then navigate to script section of your job you will get the entire pyspark script. you can edit your script.
+
+<p align="center">
+  <img width="1000" height="400" src="https://miro.medium.com/max/1167/1*8_Yk81rf_VcmN-tYV4zkYg.png">
+</p>
+
+## Workflow
+Now you can add workflow as you can see below.
+
+<p align="center">
+  <img width="1000" height="400" src="https://miro.medium.com/max/1167/1*GJNwB5j2T2MstkzxFeAecw.png">
+</p>
+
+Hope you had like this article. 😍😍 Thank you
